@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
 import { SourcesService } from './sources.service';
 import { Source } from 'src/source.entity';
+import { SourceDto } from './source.dto';
 
 @Controller('sources')
 export class SourcesController {
@@ -15,16 +16,7 @@ export class SourcesController {
   @Post()
   add(
     @Body()
-    source: {
-      id: string;
-      title: string;
-      latitude: number;
-      longitude: number;
-      email: string;
-      tel: string;
-      workingHours: string;
-      company: string;
-    },
+    source: SourceDto,
   ) {
     return this.sourcesService.add(source);
   }
@@ -33,16 +25,7 @@ export class SourcesController {
   edit(
     @Param('id') id: string,
     @Body()
-    source: {
-      id: string;
-      title: string;
-      latitude: number;
-      longitude: number;
-      email: string;
-      tel: string;
-      workingHours: string;
-      company: string;
-    },
+    source: SourceDto,
   ) {
     return this.sourcesService.edit(id, source);
   }

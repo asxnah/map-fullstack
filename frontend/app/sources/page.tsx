@@ -53,7 +53,9 @@ export default function SourcesPage() {
 
   const saveSource = async (source: Source) => {
     try {
-      await axios.post("/api/sources", source);
+      const { id, ...rest } = source;
+      await axios.post("/api/sources", rest);
+      getSources();
 
       setErr("");
     } catch (err) {
@@ -63,7 +65,9 @@ export default function SourcesPage() {
 
   const editSource = async (source: Source) => {
     try {
-      await axios.patch(`/api/sources/${source.id}`, source);
+      const { id, ...rest } = source;
+      await axios.patch(`/api/sources/${source.id}`, rest);
+      getSources();
 
       setErr("");
     } catch (err) {

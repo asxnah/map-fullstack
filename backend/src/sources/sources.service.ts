@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Source } from 'src/source.entity';
+import { SourceDto } from './source.dto';
 
 @Injectable()
 export class SourcesService {
@@ -15,31 +16,12 @@ export class SourcesService {
     return this.sourceRepository.find();
   }
 
-  async add(source: {
-    id: string;
-    title: string;
-    latitude: number;
-    longitude: number;
-    email: string;
-    tel: string;
-    workingHours: string;
-    company: string;
-  }) {
+  async add(source: SourceDto) {
     return this.sourceRepository.save(source);
   }
 
-  async edit(
-    id: string,
-    source: {
-      title: string;
-      latitude: number;
-      longitude: number;
-      email: string;
-      tel: string;
-      workingHours: string;
-      company: string;
-    },
-  ) {
+  async edit(id: string, source: SourceDto) {
     await this.sourceRepository.update(id, source);
+    return this.sourceRepository.findOne({ where: { id } });
   }
 }
