@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import axios from "axios";
+
 import { generateId } from "@/lib/generateId";
 import { Coords } from "@/types/coords";
 
@@ -9,7 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/rootReducer";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
-import { addSource, editSource, deleteSource } from "store/slices/sourcesSlice";
+import { setSources, deleteSource } from "store/slices/sourcesSlice";
 
 import { SourceForm } from "@/components/SourceForm";
 import YandexMapComponent from "@/components/Map";
@@ -18,14 +20,6 @@ import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { LuChevronRight, LuPlus, LuSearch, LuTrash2 } from "react-icons/lu";
 
 export default function SourcesPage() {
-  // --- backend test start ---
-  useEffect(() => {
-    fetch("/api/test")
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  }, []);
-  // --- backend test end ---
-
   const dispatch = useDispatch<AppDispatch>();
   const sources = useSelector((state: RootState) => state.sources.list);
   const emptyData = {
@@ -44,6 +38,42 @@ export default function SourcesPage() {
   const [formShown, setFormShown] = useState<boolean>(false);
   const [data, setData] = useState<Source>(emptyData);
   const [mapData, setMapData] = useState<Coords>();
+  const [err, setErr] = useState<string>("");
+
+  const getSources = async () => {
+    try {
+      const res = await axios.get("/api/sources");
+      dispatch(setSources(res.data));
+
+      setErr("");
+    } catch (err) {
+      setErr("Ошибка загрузки данных");
+    }
+  };
+
+  const saveSource = async (source: Source) => {
+    try {
+      await axios.post("/api/sources", source);
+
+      setErr("");
+    } catch (err) {
+      setErr("Ошибка сохранения данных");
+    }
+  };
+
+  const editSource = async (source: Source) => {
+    try {
+      await axios.patch(`/api/sources/${source.id}`, source);
+
+      setErr("");
+    } catch (err) {
+      setErr("Ошибка изменения данных");
+    }
+  };
+
+  useEffect(() => {
+    getSources();
+  }, []);
 
   useEffect(() => {
     const coords: Coords[] = sources.map((source) => [
@@ -74,10 +104,11 @@ export default function SourcesPage() {
 
   const saveData = (newData: Source) => {
     if (newData.id) {
-      dispatch(editSource(newData));
+      editSource(newData);
     } else {
-      dispatch(addSource({ ...newData, id: generateId(8) }));
+      saveSource(newData);
     }
+    getSources();
     setData(emptyData);
   };
 
@@ -119,6 +150,7 @@ export default function SourcesPage() {
               <LuPlus stroke="#212529" />
             </button>
           </div>
+          {err && <p className="text-[#e5383b]">{err}</p>}
           <ul className="grid gap-2">
             {filteredSources.map((source) => (
               <li key={source.id} className="flex gap-3">

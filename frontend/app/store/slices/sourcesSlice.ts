@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SourcesState {
   list: Source[];
@@ -9,9 +9,12 @@ const initialState: SourcesState = {
 };
 
 export const sourcesSlice = createSlice({
-  name: 'sources',
+  name: "sources",
   initialState,
   reducers: {
+    setSources: (state, action: PayloadAction<Source[]>) => {
+      state.list = action.payload;
+    },
     addSource: (state, action: PayloadAction<Source>) => {
       state.list.push(action.payload);
     },
@@ -26,5 +29,6 @@ export const sourcesSlice = createSlice({
   },
 });
 
-export const { addSource, editSource, deleteSource } = sourcesSlice.actions;
+export const { setSources, addSource, editSource, deleteSource } =
+  sourcesSlice.actions;
 export default sourcesSlice.reducer;
