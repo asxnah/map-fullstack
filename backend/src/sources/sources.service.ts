@@ -27,4 +27,8 @@ export class SourcesService {
     });
     if (data) return this.sourceRepository.save(data);
   }
+
+  async remove(id: string) {
+    return this.sourceRepository.delete(id);
+  }
 }

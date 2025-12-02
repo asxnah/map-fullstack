@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 import { SourcesService } from './sources.service';
 import { Source } from 'src/source.entity';
@@ -28,5 +36,10 @@ export class SourcesController {
     source: SourceDto,
   ) {
     return this.sourcesService.edit(id, source);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.sourcesService.remove(id);
   }
 }

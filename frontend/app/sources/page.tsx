@@ -79,6 +79,17 @@ export default function SourcesPage() {
     }
   };
 
+  const removeSource = async (id: string) => {
+    try {
+      await axios.delete(`/api/sources/${id}`);
+      dispatch(deleteSource(id));
+
+      setErr("");
+    } catch (err) {
+      setErr("Ошибка удаления данных");
+    }
+  };
+
   useEffect(() => {
     getSources();
   }, []);
@@ -116,7 +127,6 @@ export default function SourcesPage() {
     } else {
       saveSource(newData);
     }
-    getSources();
     setData(emptyData);
   };
 
@@ -173,7 +183,7 @@ export default function SourcesPage() {
                 </div>
                 <button
                   className="px-3 py-2 rounded-xl bg-[#f8f9fa] hover:bg-[#e9ecef] transition duration-300 ease-in-out"
-                  onClick={() => dispatch(deleteSource(source.id))}
+                  onClick={() => removeSource(source.id)}
                 >
                   <LuTrash2 stroke="#212529" />
                 </button>
