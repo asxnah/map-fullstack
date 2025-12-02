@@ -1,0 +1,121 @@
+import { ChangeEvent, useEffect, useState } from "react";
+import { Input } from "@/ui/Input";
+
+interface CreateSourceProps {
+  onChange: (data: Source) => void;
+  onSubmit: (formData: Source) => void;
+  initialData: Source;
+}
+
+export const SourceForm = ({
+  onChange,
+  onSubmit,
+  initialData,
+}: CreateSourceProps) => {
+  const [formData, setFormData] = useState<Source>({
+    id: "",
+    title: "",
+    latitude: 0,
+    longitude: 0,
+    email: "",
+    tel: "",
+    workingHours: "",
+    company: "",
+  });
+
+  useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      const newData = { ...prev, [name]: value };
+      onChange?.(newData);
+      return newData;
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    onSubmit(formData);
+  };
+
+  return (
+    <section className="flex flex-col gap-6 p-4 h-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
+      <h1 className="text-center text-2xl dark:text-[#f8f9fa]">
+        Создать источник
+      </h1>
+      <form className="h-full flex flex-col" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-3">
+          <Input
+            label="Наименование"
+            id="title"
+            placeholder="Карьер #1"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label="Широта"
+            id="latitude"
+            type="number"
+            min={-90}
+            max={90}
+            value={formData.latitude}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label="Долгота"
+            id="longitude"
+            type="number"
+            min={-180}
+            max={180}
+            value={formData.longitude}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label="Email"
+            id="email"
+            type="email"
+            placeholder="mail@example.com"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <Input
+            label="Телефон"
+            id="tel"
+            type="tel"
+            placeholder="+7 (900) 123-45-67"
+            telValue={formData.tel}
+            onTelChange={(value) => setFormData({ ...formData, tel: value })}
+          />
+          <Input
+            label="Часы работы"
+            id="workingHours"
+            placeholder="Пн-пт, 9-17"
+            value={formData.workingHours}
+            onChange={handleChange}
+          />
+          <Input
+            label="Название компании"
+            id="company"
+            placeholder='ООО "Название компании"'
+            value={formData.company}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button
+          className="w-full mt-auto py-2 px-3 text-[#f8f9fa] bg-[#212529] hover:bg-[#343a40] dark:bg-[#f8f9fa] dark:hover:bg-[#e9ecef] transition duration-300 ease-in-out rounded-xl font-medium dark:text-[#212529]"
+          type="submit"
+        >
+          Добавить
+        </button>
+      </form>
+    </section>
+  );
+};

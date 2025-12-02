@@ -1,0 +1,12 @@
+{
+  "name": "map-fullstack",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run start:dev  --prefix backend\"",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run start:dev  --prefix backend start:dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

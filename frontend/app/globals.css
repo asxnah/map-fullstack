@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+main {
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+input::placeholder {
+  font-size: 1rem;
+}
+
+@media (hover: hover) {
+  button:hover {
+    cursor: pointer;
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
