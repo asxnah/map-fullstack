@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { generateId } from "@/lib/generateId";
 import { Coords } from "@/types/coords";
 
 import { useSelector } from "react-redux";
