@@ -10,7 +10,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/rootReducer";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
-import { setSources, deleteSource } from "store/slices/sourcesSlice";
+import {
+  setSources,
+  addSource,
+  editSource,
+  deleteSource,
+} from "store/slices/sourcesSlice";
 
 import { SourceForm } from "@/components/SourceForm";
 import YandexMapComponent from "@/components/Map";
@@ -53,8 +58,8 @@ export default function SourcesPage() {
   const saveSource = async (source: Source) => {
     try {
       const { id, ...rest } = source;
-      await axios.post("/api/sources", rest);
-      getSources();
+      const res = await axios.post("/api/sources", rest);
+      dispatch(addSource(res.data));
 
       setErr("");
     } catch (err) {
@@ -62,11 +67,11 @@ export default function SourcesPage() {
     }
   };
 
-  const editSource = async (source: Source) => {
+  const updateSource = async (source: Source) => {
     try {
       const { id, ...rest } = source;
-      await axios.patch(`/api/sources/${source.id}`, rest);
-      getSources();
+      const res = await axios.patch(`/api/sources/${source.id}`, rest);
+      dispatch(editSource(res.data));
 
       setErr("");
     } catch (err) {
@@ -107,7 +112,7 @@ export default function SourcesPage() {
 
   const saveData = (newData: Source) => {
     if (newData.id) {
-      editSource(newData);
+      updateSource(newData);
     } else {
       saveSource(newData);
     }

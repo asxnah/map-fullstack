@@ -21,7 +21,10 @@ export class SourcesService {
   }
 
   async edit(id: string, source: SourceDto) {
-    await this.sourceRepository.update(id, source);
-    return this.sourceRepository.findOne({ where: { id } });
+    const data = await this.sourceRepository.preload({
+      id,
+      ...source,
+    });
+    if (data) return this.sourceRepository.save(data);
   }
 }
