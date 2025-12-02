@@ -45,7 +45,7 @@ export const SourceForm = ({
   return (
     <section className="flex flex-col gap-6 p-4 h-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
       <h1 className="text-center text-2xl dark:text-[#f8f9fa]">
-        Создать источник
+        {formData.id ? "Изменить источник" : "Создать источник"}
       </h1>
       <form className="h-full flex flex-col" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3">
@@ -113,7 +113,7 @@ export const SourceForm = ({
           className="w-full mt-auto py-2 px-3 text-[#f8f9fa] bg-[#212529] hover:bg-[#343a40] dark:bg-[#f8f9fa] dark:hover:bg-[#e9ecef] transition duration-300 ease-in-out rounded-xl font-medium dark:text-[#212529]"
           type="submit"
         >
-          Добавить
+          {formData.id ? "Сохранить" : "Добавить"}
         </button>
       </form>
     </section>
