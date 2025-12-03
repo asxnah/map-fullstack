@@ -3,11 +3,13 @@ import dynamic from "next/dynamic";
 interface YandexMapProps {
   placemark?: PlacemarkProps;
   placemarkList?: PlacemarkProps[];
+  onClick: (id: string) => void;
 }
 
 const YandexMapComponent = dynamic<{
   placemark?: PlacemarkProps;
   placemarkList?: PlacemarkProps[];
+  onClick: (id: string) => void;
 }>(
   () =>
     import("@iminside/react-yandex-maps").then((mod) => {
@@ -28,7 +30,7 @@ const YandexMapComponent = dynamic<{
         }
       };
 
-      return ({ placemark, placemarkList }: YandexMapProps) => (
+      return ({ placemark, placemarkList, onClick }: YandexMapProps) => (
         <div className="rounded-2xl overflow-hidden">
           <YMaps
             query={{
@@ -46,6 +48,7 @@ const YandexMapComponent = dynamic<{
                   options={{
                     iconColor: getPlacemarkColor(placemark.status),
                   }}
+                  onClick={() => onClick(placemark.sourceID)}
                 />
               </Map>
             )}
@@ -64,6 +67,7 @@ const YandexMapComponent = dynamic<{
                       options={{
                         iconColor: getPlacemarkColor(placemark.status),
                       }}
+                      onClick={() => onClick(placemark.sourceID)}
                     />
                   ))}
               </Map>

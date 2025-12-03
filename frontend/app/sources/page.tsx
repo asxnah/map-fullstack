@@ -125,6 +125,7 @@ export default function SourcesPage() {
     const data: PlacemarkProps[] = sources.map((source) => ({
       coords: [source.latitude, source.longitude],
       status: source.status,
+      sourceID: source.id,
     }));
     setPlacemarkList(data);
   }, [sources]);
@@ -133,8 +134,9 @@ export default function SourcesPage() {
     setPlacemark({
       coords: [data.latitude, data.longitude],
       status: data.status,
+      sourceID: data.id,
     });
-  }, [data.latitude, data.longitude, data.status]);
+  }, [data.latitude, data.longitude, data.status, data.id]);
 
   const filteredSources = sources.filter((source) =>
     source.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -220,9 +222,15 @@ export default function SourcesPage() {
       )}
 
       {formShown ? (
-        <YandexMapComponent placemark={placemark} />
+        <YandexMapComponent
+          placemark={placemark}
+          onClick={handleClick}
+        />
       ) : (
-        <YandexMapComponent placemarkList={placemarkList} />
+        <YandexMapComponent
+          placemarkList={placemarkList}
+          onClick={handleClick}
+        />
       )}
     </main>
   );
