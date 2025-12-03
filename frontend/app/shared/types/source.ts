@@ -7,4 +7,5 @@ interface Source {
   tel: string;
   workingHours: string;
   company: string;
+  status: string;
 }

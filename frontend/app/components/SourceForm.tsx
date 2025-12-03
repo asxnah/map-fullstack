@@ -24,16 +24,22 @@ export const SourceForm = ({
     tel: "",
     workingHours: "",
     company: "",
+    status: "notSpecified",
   });
 
   useEffect(() => {
     setFormData(initialData);
   }, [initialData]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => {
-      const newData = { ...prev, [name]: value };
+      const newData = {
+        ...prev,
+        [name]: value,
+      };
       onChange?.(newData);
       return newData;
     });
@@ -124,6 +130,27 @@ export const SourceForm = ({
             value={formData.company}
             onChange={handleChange}
           />
+          <div className="grid gap-1 py-2 px-3 bg-[#f8f9fa] dark:bg-[#495057] rounded-xl">
+            <label
+              htmlFor="status"
+              className={"text-sm text-[#212529] dark:text-[#f8f9fa]"}
+            >
+              Статус
+            </label>
+            <select
+              name="status"
+              id="status"
+              className="text-base text-[#212529] placeholder:text-[#6c757d] dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none"
+              value={formData.status}
+              onChange={handleChange}
+              defaultValue={"notSpecified"}
+            >
+              <option value="notSpecified">Не указан</option>
+              <option value="active">Активный</option>
+              <option value="inactive">Неактивный</option>
+              <option value="inProgress">В разработке</option>
+            </select>
+          </div>
         </div>
 
         <button

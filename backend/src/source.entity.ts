@@ -25,4 +25,7 @@ export class Source {
 
   @Column({ nullable: true })
   company: string;
+
+  @Column()
+  status: string;
 }

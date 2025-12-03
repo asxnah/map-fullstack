@@ -20,9 +20,9 @@ import {
 import { SourceForm } from "@/components/SourceForm";
 import YandexMapComponent from "@/components/Map";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { SourcesLoadingShimmer } from "@/components/SourcesLoadingShimmer";
 
 import { LuChevronRight, LuPlus, LuSearch, LuTrash2 } from "react-icons/lu";
-import { SourcesLoadingShimmer } from "@/components/SourcesLoadingShimmer";
 
 export default function SourcesPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,6 +36,7 @@ export default function SourcesPage() {
     tel: "",
     workingHours: "",
     company: "",
+    status: "notSpecified",
   };
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -72,6 +73,7 @@ export default function SourcesPage() {
   };
 
   const updateSource = async (source: Source) => {
+    console.log(source);
     try {
       const { id, ...rest } = source;
       const res = await axios.patch(`/api/sources/${source.id}`, rest);
@@ -92,6 +94,7 @@ export default function SourcesPage() {
     } catch (err) {
       setErr("Ошибка удаления данных");
     }
+    if (data.id) setFormShown(false);
   };
 
   useEffect(() => {
