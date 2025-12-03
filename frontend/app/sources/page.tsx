@@ -198,6 +198,7 @@ export default function SourcesPage() {
         <SourceForm
           onSubmit={(formData) => saveData(formData)}
           onChange={setData}
+          onClick={() => setFormShown(false)}
           initialData={data}
         />
       )}

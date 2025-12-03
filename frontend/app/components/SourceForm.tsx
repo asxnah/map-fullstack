@@ -1,15 +1,18 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Input } from "@/ui/Input";
+import { LuChevronLeft } from "react-icons/lu";
 
 interface CreateSourceProps {
   onChange: (data: Source) => void;
   onSubmit: (formData: Source) => void;
+  onClick: () => void;
   initialData: Source;
 }
 
 export const SourceForm = ({
   onChange,
   onSubmit,
+  onClick,
   initialData,
 }: CreateSourceProps) => {
   const [formData, setFormData] = useState<Source>({
@@ -44,9 +47,23 @@ export const SourceForm = ({
 
   return (
     <section className="flex flex-col gap-6 p-4 h-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
-      <h1 className="text-center text-2xl dark:text-[#f8f9fa]">
-        {formData.id ? "Изменить источник" : "Создать источник"}
-      </h1>
+      <div className="flex justify-between items-center">
+        <button
+          onClick={onClick}
+          aria-label={`Скрыть форму ${
+            formData.id ? "изменения" : "создания"
+          } источника`}
+        >
+          <LuChevronLeft
+            aria-hidden="true"
+            size={20}
+            className="stroke-[#212529] dark:stroke-[#f8f9fa]"
+          />
+        </button>
+        <h1 className="text-center text-2xl dark:text-[#f8f9fa]">
+          {formData.id ? "Изменить источник" : "Создать источник"}
+        </h1>
+      </div>
       <form className="h-full flex flex-col" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3">
           <Input
