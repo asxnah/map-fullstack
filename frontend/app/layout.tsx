@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { ReduxProvider } from 'reduxProvider';
-import './globals.css';
+import { ReduxProvider } from '@/reduxProvider';
+import '@/globals.css';
 
 export const metadata: Metadata = {
   title: 'Map',

@@ -7,15 +7,15 @@ import axios from "axios";
 import { Coords } from "@/types/coords";
 
 import { useSelector } from "react-redux";
-import { RootState } from "store/rootReducer";
+import { RootState } from "@/store/rootReducer";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "store";
+import { AppDispatch } from "@/store";
 import {
   setSources,
   addSource,
   editSource,
   deleteSource,
-} from "store/slices/sourcesSlice";
+} from "@/store/slices/sourcesSlice";
 
 import { SourceForm } from "@/components/SourceForm";
 import YandexMapComponent from "@/components/Map";

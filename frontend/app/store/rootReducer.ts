@@ -1,5 +1,5 @@
-import { combineReducers } from '@reduxjs/toolkit';
-import sourcesReducer from './slices/sourcesSlice';
+import { combineReducers } from "@reduxjs/toolkit";
+import sourcesReducer from "@/store/slices/sourcesSlice";
 
 export const rootReducer = combineReducers({
   sources: sourcesReducer,

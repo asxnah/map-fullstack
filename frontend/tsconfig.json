@@ -18,13 +18,15 @@
         "name": "next"
       }
     ],
-    "baseUrl": "app/",
     "paths": {
-      "@/ui/*": ["shared/ui/*"],
-      "@/lib/*": ["shared/lib/*"],
-      "@/components/*": ["components/*"],
-      "@/icons/*": ["shared/icons/*"],
-      "@/types/*": ["shared/types/*"],
+      "@/*": ["./app/*"],
+      "@/store": ["./app/store"],
+      "@/store/": ["./app/store/*"],
+      "@/ui/*": ["./app/shared/ui/*"],
+      "@/lib/*": ["./app/shared/lib/*"],
+      "@/components/*": ["./app/components/*"],
+      "@/icons/*": ["./app/shared/icons/*"],
+      "@/types/*": ["./app/shared/types/*"]
     }
   },
   "include": [
