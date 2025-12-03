@@ -220,7 +220,7 @@ export default function SourcesPage() {
         />
       )}
 
-      {data.latitude !== 0 && data.longitude !== 0 ? (
+      {formShown ? (
         <YandexMapComponent placemark={placemark} />
       ) : (
         <YandexMapComponent placemarkList={placemarkList} />
