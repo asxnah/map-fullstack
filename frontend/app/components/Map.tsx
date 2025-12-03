@@ -18,7 +18,7 @@ const YandexMapComponent = dynamic<{
       const getPlacemarkColor = (status: string) => {
         switch (status) {
           case "notSpecified":
-            return "#1982c4";
+            return "#adb5bd";
           case "active":
             return "#8ac926";
           case "inactive":
@@ -26,7 +26,7 @@ const YandexMapComponent = dynamic<{
           case "inProgress":
             return "#ffca3a";
           default:
-            return "#1982c4";
+            return "#adb5bd";
         }
       };
 
