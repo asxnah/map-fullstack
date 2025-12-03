@@ -162,10 +162,11 @@ export default function SourcesPage() {
           <div className="flex items-center justify-between rounded-xl dark:text-[#f8f9fa]">
             <span>Новый источник</span>
             <button
+              aria-label="Добавить источник"
               className="p-2 rounded-xl bg-[#f8f9fa] hover:bg-[#e9ecef] transition duration-300 ease-in-out"
               onClick={() => handleClick()}
             >
-              <LuPlus stroke="#212529" />
+              <LuPlus aria-hidden="true" stroke="#212529" />
             </button>
           </div>
           {err && <p className="text-[#e5383b]">{err}</p>}
@@ -182,10 +183,11 @@ export default function SourcesPage() {
                   </button>
                 </div>
                 <button
+                  aria-label="Удалить источник"
                   className="px-3 py-2 rounded-xl bg-[#f8f9fa] hover:bg-[#e9ecef] transition duration-300 ease-in-out"
                   onClick={() => removeSource(source.id)}
                 >
-                  <LuTrash2 stroke="#212529" />
+                  <LuTrash2 aria-hidden="true" stroke="#212529" />
                 </button>
               </li>
             ))}
