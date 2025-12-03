@@ -20,7 +20,6 @@
     ],
     "paths": {
       "@/*": ["./app/*"],
-      "@/store": ["./app/store"],
       "@/store/": ["./app/store/*"],
       "@/ui/*": ["./app/shared/ui/*"],
       "@/lib/*": ["./app/shared/lib/*"],
