@@ -35,13 +35,15 @@ export const SourceForm = ({
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => {
-      const newData = {
-        ...prev,
-        [name]: value,
-      };
-      onChange?.(newData);
-      return newData;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    onChange({
+      ...formData,
+      [name]: value,
     });
   };
 
