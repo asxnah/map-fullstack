@@ -37,6 +37,7 @@ export default function SourcesPage() {
     company: "",
   };
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [allCoords, setAllCoords] = useState<Coords[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [formShown, setFormShown] = useState<boolean>(false);
@@ -45,6 +46,7 @@ export default function SourcesPage() {
   const [err, setErr] = useState<string>("");
 
   const getSources = async () => {
+    setLoading(true);
     try {
       const res = await axios.get("/api/sources");
       dispatch(setSources(res.data));
@@ -53,6 +55,7 @@ export default function SourcesPage() {
     } catch (err) {
       setErr("Ошибка загрузки данных");
     }
+    setLoading(false);
   };
 
   const saveSource = async (source: Source) => {
@@ -175,6 +178,7 @@ export default function SourcesPage() {
             </button>
           </div>
           {err && <p className="text-[#e5383b]">{err}</p>}
+          {loading && <p>Загрузка...</p>}
           <ul className="grid gap-2">
             {filteredSources.map((source) => (
               <li key={source.id} className="flex gap-3">
