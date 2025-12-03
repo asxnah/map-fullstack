@@ -28,4 +28,7 @@ export class SourceDto {
   @IsOptional()
   @IsString()
   company?: string;
+
+  @IsString()
+  status: 'notSpecified' | 'active' | 'inactive' | 'inProgress';
 }
