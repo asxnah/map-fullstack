@@ -77,7 +77,6 @@ export default function SourcesPage() {
   };
 
   const updateSource = async (source: Source) => {
-    console.log(source);
     try {
       const { id, ...rest } = source;
       const res = await axios.patch(`/api/sources/${source.id}`, rest);
