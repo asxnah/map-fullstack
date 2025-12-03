@@ -22,6 +22,7 @@ import YandexMapComponent from "@/components/Map";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 import { LuChevronRight, LuPlus, LuSearch, LuTrash2 } from "react-icons/lu";
+import { SourcesLoadingShimmer } from "@/components/SourcesLoadingShimmer";
 
 export default function SourcesPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,7 +38,7 @@ export default function SourcesPage() {
     company: "",
   };
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [allCoords, setAllCoords] = useState<Coords[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [formShown, setFormShown] = useState<boolean>(false);
@@ -131,6 +132,7 @@ export default function SourcesPage() {
       saveSource(newData);
     }
     setData(emptyData);
+    setFormShown(false);
   };
 
   return (
@@ -178,7 +180,7 @@ export default function SourcesPage() {
             </button>
           </div>
           {err && <p className="text-[#e5383b]">{err}</p>}
-          {loading && <p>Загрузка...</p>}
+          {loading && <SourcesLoadingShimmer />}
           <ul className="grid gap-2">
             {filteredSources.map((source) => (
               <li key={source.id} className="flex gap-3">
