@@ -48,20 +48,19 @@ export default function SourcesPage() {
 
   const [data, setData] = useState<Source>(emptyData);
 
-  const getSources = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get("/api/sources");
-      dispatch(setSources(res.data));
-
-      setErr("");
-    } catch (err) {
-      setErr("Ошибка загрузки данных");
-    }
-    setLoading(false);
-  };
   useEffect(() => {
-    getSources();
+    (async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get("/api/sources");
+        dispatch(setSources(res.data));
+
+        setErr("");
+      } catch (err) {
+        setErr("Ошибка загрузки данных");
+      }
+      setLoading(false);
+    })();
   }, []);
 
   const saveSource = async (source: Source) => {
@@ -222,10 +221,7 @@ export default function SourcesPage() {
       )}
 
       {formShown ? (
-        <YandexMapComponent
-          placemark={placemark}
-          onClick={handleClick}
-        />
+        <YandexMapComponent placemark={placemark} onClick={handleClick} />
       ) : (
         <YandexMapComponent
           placemarkList={placemarkList}
