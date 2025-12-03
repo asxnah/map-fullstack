@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SourcesModule } from './sources/sources.module';
 
-import { Source } from './source.entity';
+import { Source } from './sources/source.entity';
 
 @Module({
   imports: [

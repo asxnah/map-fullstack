@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Source } from 'src/source.entity';
+import { Source } from './source.entity';
 import { SourcesService } from './sources.service';
 import { SourcesController } from './sources.controller';
 

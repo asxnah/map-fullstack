@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 
 import { SourcesService } from './sources.service';
-import { Source } from 'src/source.entity';
+import { Source } from './source.entity';
 import { SourceDto } from './source.dto';
 
 @Controller('sources')
