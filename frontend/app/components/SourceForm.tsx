@@ -35,13 +35,15 @@ export const SourceForm = ({
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => {
-      const newData = {
-        ...prev,
-        [name]: value,
-      };
-      onChange?.(newData);
-      return newData;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    onChange({
+      ...formData,
+      [name]: value,
     });
   };
 
@@ -143,7 +145,6 @@ export const SourceForm = ({
               className="text-base text-[#212529] placeholder:text-[#6c757d] dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none"
               value={formData.status}
               onChange={handleChange}
-              defaultValue={"notSpecified"}
             >
               <option value="notSpecified">Не указан</option>
               <option value="active">Активный</option>

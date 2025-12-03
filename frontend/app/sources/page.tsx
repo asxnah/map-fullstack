@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { Coords } from "@/types/coords";
-
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/rootReducer";
 import { useDispatch } from "react-redux";
@@ -40,12 +38,15 @@ export default function SourcesPage() {
   };
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [allCoords, setAllCoords] = useState<Coords[]>([]);
+  const [err, setErr] = useState<string>("");
+
+  const [placemarkList, setPlacemarkList] = useState<PlacemarkProps[]>([]);
+  const [placemark, setPlacemark] = useState<PlacemarkProps>();
+
   const [searchValue, setSearchValue] = useState("");
   const [formShown, setFormShown] = useState<boolean>(false);
+
   const [data, setData] = useState<Source>(emptyData);
-  const [mapData, setMapData] = useState<Coords>();
-  const [err, setErr] = useState<string>("");
 
   const getSources = async () => {
     setLoading(true);
@@ -59,6 +60,9 @@ export default function SourcesPage() {
     }
     setLoading(false);
   };
+  useEffect(() => {
+    getSources();
+  }, []);
 
   const saveSource = async (source: Source) => {
     try {
@@ -73,7 +77,6 @@ export default function SourcesPage() {
   };
 
   const updateSource = async (source: Source) => {
-    console.log(source);
     try {
       const { id, ...rest } = source;
       const res = await axios.patch(`/api/sources/${source.id}`, rest);
@@ -83,6 +86,16 @@ export default function SourcesPage() {
     } catch (err) {
       setErr("Ошибка изменения данных");
     }
+  };
+
+  const saveData = (newData: Source) => {
+    if (newData.id) {
+      updateSource(newData);
+    } else {
+      saveSource(newData);
+    }
+    setData(emptyData);
+    setFormShown(false);
   };
 
   const removeSource = async (id: string) => {
@@ -97,26 +110,6 @@ export default function SourcesPage() {
     if (data.id) setFormShown(false);
   };
 
-  useEffect(() => {
-    getSources();
-  }, []);
-
-  useEffect(() => {
-    const coords: Coords[] = sources.map((source) => [
-      source.latitude,
-      source.longitude,
-    ]);
-    setAllCoords(coords);
-  }, [sources]);
-
-  useEffect(() => {
-    setMapData([data.latitude, data.longitude]);
-  }, [data.latitude, data.longitude]);
-
-  const filteredSources = sources.filter((source) =>
-    source.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
   const handleClick = (id?: string) => {
     setFormShown(true);
 
@@ -128,15 +121,24 @@ export default function SourcesPage() {
     }
   };
 
-  const saveData = (newData: Source) => {
-    if (newData.id) {
-      updateSource(newData);
-    } else {
-      saveSource(newData);
-    }
-    setData(emptyData);
-    setFormShown(false);
-  };
+  useEffect(() => {
+    const data: PlacemarkProps[] = sources.map((source) => ({
+      coords: [source.latitude, source.longitude],
+      status: source.status,
+    }));
+    setPlacemarkList(data);
+  }, [sources]);
+
+  useEffect(() => {
+    setPlacemark({
+      coords: [data.latitude, data.longitude],
+      status: data.status,
+    });
+  }, [data.latitude, data.longitude, data.status]);
+
+  const filteredSources = sources.filter((source) =>
+    source.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <main
@@ -217,10 +219,10 @@ export default function SourcesPage() {
         />
       )}
 
-      {data.latitude !== 0 && data.longitude !== 0 ? (
-        <YandexMapComponent coords={mapData} />
+      {formShown ? (
+        <YandexMapComponent placemark={placemark} />
       ) : (
-        <YandexMapComponent allCoords={allCoords} />
+        <YandexMapComponent placemarkList={placemarkList} />
       )}
     </main>
   );
