@@ -143,7 +143,6 @@ export const SourceForm = ({
               className="text-base text-[#212529] placeholder:text-[#6c757d] dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none"
               value={formData.status}
               onChange={handleChange}
-              defaultValue={"notSpecified"}
             >
               <option value="notSpecified">Не указан</option>
               <option value="active">Активный</option>
