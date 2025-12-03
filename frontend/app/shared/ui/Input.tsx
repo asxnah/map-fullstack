@@ -30,7 +30,7 @@ export const Input = ({
     <div className='grid gap-1 py-2 px-3 bg-[#f8f9fa] dark:bg-[#495057] rounded-xl'>
       <label
         htmlFor={id}
-        className={`text-sm dark:text-[#f8f9fa] ${required ? 'relative after:content-["*"] after:ml-1 after:text-[#e5383b]' : ''}`}
+        className={`text-sm text-[#212529] dark:text-[#f8f9fa] ${required ? 'relative after:content-["*"] after:ml-1 after:text-[#e5383b]' : ''}`}
       >
         {label}
       </label>
@@ -39,7 +39,8 @@ export const Input = ({
         type === 'tel' ? (
           <PhoneInput
             placeholder={placeholder}
-            inputClass='text-base dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none'
+            inputClass='text-base text-[#212529] placeholder:text-[#6c757d] dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none'
+
             value={telValue}
             onChange={onTelChange}
             specialLabel=''
@@ -54,7 +55,7 @@ export const Input = ({
             type={type}
             placeholder={placeholder}
             required={required}
-            className='text-base dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none'
+            className='text-base text-[#212529] placeholder:text-[#6c757d] dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none'
             {...rest}
           />
         )

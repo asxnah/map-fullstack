@@ -60,7 +60,7 @@ export const SourceForm = ({
             className="stroke-[#212529] dark:stroke-[#f8f9fa]"
           />
         </button>
-        <h1 className="text-center text-2xl dark:text-[#f8f9fa]">
+        <h1 className="text-center text-2xl text-[#212529] dark:text-[#f8f9fa]">
           {formData.id ? "Изменить источник" : "Создать источник"}
         </h1>
       </div>

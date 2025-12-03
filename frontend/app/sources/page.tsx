@@ -138,12 +138,15 @@ export default function SourcesPage() {
     >
       <ThemeSwitcher />
       <section className="p-4 h-full w-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
-        <h1 className="mb-6 text-center text-2xl dark:text-[#f8f9fa]">
+        <h1 className="mb-6 text-center text-2xl text-[#212529] dark:text-[#f8f9fa]">
           Источники
         </h1>
         <div className="grid gap-4">
           <div className="p-2 px-3 grid gap-1 bg-[#f8f9fa] dark:bg-[#495057] rounded-xl">
-            <label className="text-sm dark:text-[#f8f9fa]" htmlFor="search">
+            <label
+              className="text-sm text-[#212529] dark:text-[#f8f9fa]"
+              htmlFor="search"
+            >
               Поиск
             </label>
             <div className="flex items-center gap-2">
@@ -151,7 +154,7 @@ export default function SourcesPage() {
               <input
                 id="search"
                 name="search"
-                className="w-full text-base dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none"
+                className="w-full text-base text-[#212529] placeholder:text-[#6c757d] dark:text-[#f8f9fa] dark:placeholder:text-[#adb5bd] focus-visible:outline-none"
                 type="text"
                 placeholder="Поиск по названию или ID..."
                 value={searchValue}
@@ -159,8 +162,10 @@ export default function SourcesPage() {
               />
             </div>
           </div>
-          <div className="flex items-center justify-between rounded-xl dark:text-[#f8f9fa]">
-            <span>Новый источник</span>
+          <div className="flex items-center justify-between rounded-xl">
+            <span className="text-[#212529] dark:text-[#f8f9fa]">
+              Новый источник
+            </span>
             <button
               aria-label="Добавить источник"
               className="p-2 rounded-xl bg-[#f8f9fa] hover:bg-[#e9ecef] transition duration-300 ease-in-out"
@@ -175,10 +180,10 @@ export default function SourcesPage() {
               <li key={source.id} className="flex gap-3">
                 <div className="grow flex gap-1">
                   <button
-                    className="w-full py-2 px-3 flex items-center justify-between bg-[#495057] hover:bg-[#6c757d] transition duration-300 ease-in-out font-medium rounded-xl text-[#f8f9fa]"
+                    className="w-full py-2 px-3 flex items-center justify-between bg-[#495057] hover:bg-[#6c757d] transition duration-300 ease-in-out font-medium rounded-xl"
                     onClick={() => handleClick(source.id)}
                   >
-                    <span>{source.title}</span>
+                    <span className="text-[#f8f9fa]">{source.title}</span>
                     <LuChevronRight stroke="#f8f9fa" />
                   </button>
                 </div>
