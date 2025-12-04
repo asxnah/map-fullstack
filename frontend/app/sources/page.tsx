@@ -122,10 +122,6 @@ export default function SourcesPage() {
     }
   };
 
-  // panel ? ''
-  // !panel && form ? -49
-  // !panel && !form ? -25
-
   const translate =
     !panelShown && formShown
       ? "-translate-x-[51rem]"
