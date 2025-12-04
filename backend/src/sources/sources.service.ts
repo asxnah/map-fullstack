@@ -16,11 +16,11 @@ export class SourcesService {
     return this.sourceRepository.find();
   }
 
-  async add(source: SourceDto) {
+  async save(source: SourceDto) {
     return this.sourceRepository.save(source);
   }
 
-  async edit(id: string, source: SourceDto) {
+  async update(id: string, source: SourceDto) {
     const data = await this.sourceRepository.preload({
       id,
       ...source,
@@ -28,7 +28,7 @@ export class SourcesService {
     if (data) return this.sourceRepository.save(data);
   }
 
-  async remove(id: string) {
+  async delete(id: string) {
     return this.sourceRepository.delete(id);
   }
 }

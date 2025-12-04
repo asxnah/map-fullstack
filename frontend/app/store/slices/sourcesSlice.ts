@@ -12,23 +12,22 @@ export const sourcesSlice = createSlice({
   name: "sources",
   initialState,
   reducers: {
-    setSources: (state, action: PayloadAction<Source[]>) => {
+    set: (state, action: PayloadAction<Source[]>) => {
       state.list = action.payload;
     },
-    addSource: (state, action: PayloadAction<Source>) => {
+    add: (state, action: PayloadAction<Source>) => {
       state.list.push(action.payload);
     },
-    editSource: (state, action: PayloadAction<Source>) => {
+    update: (state, action: PayloadAction<Source>) => {
       state.list = state.list.map((source) =>
         source.id === action.payload.id ? action.payload : source
       );
     },
-    deleteSource: (state, action: PayloadAction<string>) => {
+    remove: (state, action: PayloadAction<string>) => {
       state.list = state.list.filter((source) => source.id !== action.payload);
     },
   },
 });
 
-export const { setSources, addSource, editSource, deleteSource } =
-  sourcesSlice.actions;
+export const { set, add, update, remove } = sourcesSlice.actions;
 export default sourcesSlice.reducer;

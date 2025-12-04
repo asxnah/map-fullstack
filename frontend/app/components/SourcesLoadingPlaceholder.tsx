@@ -1,4 +1,4 @@
-export const SourcesLoadingShimmer = () => {
+export const SourcesLoadingPlaceholder = () => {
   return (
     <div className="grid gap-2">
       {Array.from({ length: 5 }).map((_, i) => (

@@ -26,20 +26,20 @@ export class SourcesController {
     @Body()
     source: SourceDto,
   ) {
-    return this.sourcesService.add(source);
+    return this.sourcesService.save(source);
   }
 
   @Patch(':id')
-  edit(
+  update(
     @Param('id') id: string,
     @Body()
     source: SourceDto,
   ) {
-    return this.sourcesService.edit(id, source);
+    return this.sourcesService.update(id, source);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.sourcesService.remove(id);
+    return this.sourcesService.delete(id);
   }
 }
