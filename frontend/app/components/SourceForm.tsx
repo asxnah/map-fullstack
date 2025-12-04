@@ -73,10 +73,10 @@ export const SourceForm = ({
         </h1>
       </div>
       <form
-        className="h-full flex flex-col h-full overflow-y-scroll rounded-xl"
+        className="h-full flex flex-col overflow-y-scroll rounded-xl relative"
         onSubmit={handleSubmit}
       >
-        <div className="flex flex-col gap-3 mb-6">
+        <div className="flex flex-col gap-3 mb-14">
           <Input
             label="Наименование"
             id="title"
@@ -160,7 +160,7 @@ export const SourceForm = ({
         </div>
 
         <button
-          className="w-full mt-auto py-2 px-3 text-[#f8f9fa] bg-[#212529] hover:bg-[#343a40] dark:bg-[#f8f9fa] dark:hover:bg-[#e9ecef] transition duration-300 ease-in-out rounded-xl font-medium dark:text-[#212529]"
+          className="mt-auto py-2 px-24 text-[#f8f9fa] bg-[#212529] hover:bg-[#343a40] dark:bg-[#f8f9fa] dark:hover:bg-[#e9ecef] transition duration-300 ease-in-out rounded-xl font-medium dark:text-[#212529] fixed bottom-7 self-center"
           type="submit"
         >
           {formData.id ? "Сохранить" : "Добавить"}
