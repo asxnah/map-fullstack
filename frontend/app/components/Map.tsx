@@ -1,3 +1,4 @@
+import { PlacemarkProps } from "@/shared/types/placemark";
 import dynamic from "next/dynamic";
 
 interface YandexMapProps {
