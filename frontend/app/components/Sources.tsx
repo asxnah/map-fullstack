@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { SourcesLoadingShimmer } from "@/components/SourcesLoadingShimmer";
+import { SourcesLoadingPlaceholder } from "@/components/SourcesLoadingPlaceholder";
 import { LuChevronRight, LuPlus, LuSearch, LuTrash2 } from "react-icons/lu";
 
 interface Sources {
   sources: Source[];
   handleClick: (id?: string) => void;
   loading: boolean;
-  err: string;
+  error: string;
   removeSource: (id: string) => void;
 }
 
@@ -14,7 +14,7 @@ export const Sources = ({
   sources,
   handleClick,
   loading,
-  err,
+  error,
   removeSource,
 }: Sources) => {
   const [searchValue, setSearchValue] = useState("");
@@ -61,8 +61,8 @@ export const Sources = ({
             <LuPlus aria-hidden="true" stroke="#212529" />
           </button>
         </div>
-        {err && <p className="text-[#e5383b]">{err}</p>}
-        {loading && <SourcesLoadingShimmer />}
+        {error && <p className="text-[#e5383b]">{error}</p>}
+        {loading && <SourcesLoadingPlaceholder />}
         <ul className="grid gap-2">
           {filteredSources.map((source) => (
             <li key={source.id} className="flex gap-3">
