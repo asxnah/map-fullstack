@@ -113,6 +113,7 @@ export default function SourcesPage() {
 
   const handleClick = (id?: string) => {
     setFormShown(true);
+    setPanelShown(true);
 
     if (id) {
       const sourceFound = sources.find((source: Source) => source.id === id);
