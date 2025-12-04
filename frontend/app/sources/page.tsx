@@ -14,6 +14,9 @@ import { SourceForm } from "@/components/SourceForm";
 import YandexMapComponent from "@/components/Map";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Sources } from "@/components/Sources";
+import { PlacemarkProps } from "@/shared/types/placemark";
+import { Source } from "@/shared/types/source";
+
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 export default function SourcesPage() {
@@ -47,11 +50,12 @@ export default function SourcesPage() {
       try {
         const res = await axios.get("/api/sources");
         dispatch(set(res.data));
-      } catch (error) {
+      } catch {
         setError("Ошибка загрузки данных");
       }
       setLoading(false);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -73,20 +77,24 @@ export default function SourcesPage() {
 
   const saveSource = async (source: Source) => {
     try {
-      const { id, ...rest } = source;
+      const rest = Object.fromEntries(
+        Object.entries(source).filter(([key]) => key !== "id")
+      );
       const res = await axios.post("/api/sources", rest);
       dispatch(add(res.data));
-    } catch (error) {
+    } catch {
       setError("Ошибка сохранения данных");
     }
   };
 
   const updateSource = async (source: Source) => {
     try {
-      const { id, ...rest } = source;
+      const rest = Object.fromEntries(
+        Object.entries(source).filter(([key]) => key !== "id")
+      );
       const res = await axios.patch(`/api/sources/${source.id}`, rest);
       dispatch(update(res.data));
-    } catch (error) {
+    } catch {
       setError("Ошибка изменения данных");
     }
   };
@@ -95,7 +103,7 @@ export default function SourcesPage() {
     try {
       await axios.delete(`/api/sources/${id}`);
       dispatch(remove(id));
-    } catch (error) {
+    } catch {
       setError("Ошибка удаления данных");
     }
     if (source.id) setFormShown(false);

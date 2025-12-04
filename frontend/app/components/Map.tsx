@@ -30,7 +30,11 @@ const YandexMapComponent = dynamic<{
         }
       };
 
-      return ({ placemark, placemarkList, onClick }: YandexMapProps) => (
+      const Component = ({
+        placemark,
+        placemarkList,
+        onClick,
+      }: YandexMapProps) => (
         <div className="h-full w-full rounded-2xl overflow-hidden">
           <YMaps
             query={{
@@ -75,6 +79,8 @@ const YandexMapComponent = dynamic<{
           </YMaps>
         </div>
       );
+      Component.displayName = "YandexMapComponent";
+      return Component;
     }),
   { ssr: false }
 );

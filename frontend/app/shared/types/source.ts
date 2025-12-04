@@ -1,4 +1,4 @@
-interface Source {
+export interface Source {
   id: string;
   title: string;
   latitude: number;
