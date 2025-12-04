@@ -23,7 +23,7 @@ export const ThemeSwitcher = () => {
 
   return (
     <button
-      className="absolute top-2 left-2 py-3 px-3 dark:bg-[#f8f9fa] dark:text-[#212529] text-[#f8f9fa] dark:hover:bg-[#e9ecef] hover:bg-[#343a40] transition duration-300 ease-in-out bg-[#212529] rounded-full"
+      className="absolute top-2 left-2 z-99 py-3 px-3 dark:bg-[#f8f9fa] dark:text-[#212529] text-[#f8f9fa] dark:hover:bg-[#e9ecef] hover:bg-[#343a40] transition duration-300 ease-in-out bg-[#212529] rounded-full"
       onClick={switchTheme}
     >
       {isDark ? (

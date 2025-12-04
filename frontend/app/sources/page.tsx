@@ -121,27 +121,29 @@ export default function SourcesPage() {
   };
 
   return (
-    <main
-      className={`relative grid ${
-        formShown ? "grid-cols-[26rem_26rem_auto]" : "grid-cols-[26rem_auto]"
-      } gap-6 bg-[#f8f9fa] dark:bg-[#212529]`}
-    >
+    <main className="relative bg-[#f8f9fa] dark:bg-[#212529] p-1 h-[100vh]">
       <ThemeSwitcher />
-      <Sources
-        sources={sources}
-        loading={loading}
-        error={error}
-        removeSource={removeSource}
-        handleClick={handleClick}
-      />
-      {formShown && (
-        <SourceForm
-          onSubmit={(formData) => handleData(formData)}
-          onChange={setSource}
-          onClick={() => setFormShown(false)}
-          initialData={source}
+      <div
+        className={`absolute z-1 left-3 bottom-3 overflow-hidden grid ${
+          formShown ? "grid-cols-[24rem_24rem_auto]" : "grid-cols-[24rem_auto]"
+        } gap-6`}
+      >
+        <Sources
+          sources={sources}
+          loading={loading}
+          error={error}
+          removeSource={removeSource}
+          handleClick={handleClick}
         />
-      )}
+        {formShown && (
+          <SourceForm
+            onSubmit={(formData) => handleData(formData)}
+            onChange={setSource}
+            onClick={() => setFormShown(false)}
+            initialData={source}
+          />
+        )}
+      </div>
 
       {formShown ? (
         <YandexMapComponent placemark={placemark} onClick={handleClick} />

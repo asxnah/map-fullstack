@@ -54,7 +54,7 @@ export const SourceForm = ({
   };
 
   return (
-    <section className="flex flex-col gap-6 p-4 h-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
+    <section className="flex overflow-hidden flex-col gap-6 p-4 h-[60vh] bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
       <div className="flex justify-between items-center">
         <button
           onClick={onClick}
@@ -72,8 +72,11 @@ export const SourceForm = ({
           {formData.id ? "Изменить источник" : "Создать источник"}
         </h1>
       </div>
-      <form className="h-full flex flex-col" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-3">
+      <form
+        className="h-full flex flex-col h-full overflow-y-scroll rounded-xl"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex flex-col gap-3 mb-6">
           <Input
             label="Наименование"
             id="title"
