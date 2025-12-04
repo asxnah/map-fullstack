@@ -83,16 +83,6 @@ export default function SourcesPage() {
     }
   };
 
-  const saveData = (newData: Source) => {
-    if (newData.id) {
-      updateSource(newData);
-    } else {
-      saveSource(newData);
-    }
-    setData(emptyData);
-    setFormShown(false);
-  };
-
   const removeSource = async (id: string) => {
     try {
       await axios.delete(`/api/sources/${id}`);
@@ -103,6 +93,16 @@ export default function SourcesPage() {
       setErr("Ошибка удаления данных");
     }
     if (data.id) setFormShown(false);
+  };
+
+  const handleData = (newData: Source) => {
+    if (newData.id) {
+      updateSource(newData);
+    } else {
+      saveSource(newData);
+    }
+    setData(emptyData);
+    setFormShown(false);
   };
 
   const handleClick = (id?: string) => {
@@ -149,7 +149,7 @@ export default function SourcesPage() {
       />
       {formShown && (
         <SourceForm
-          onSubmit={(formData) => saveData(formData)}
+          onSubmit={(formData) => handleData(formData)}
           onChange={setData}
           onClick={() => setFormShown(false)}
           initialData={data}
