@@ -14,6 +14,7 @@ import { SourceForm } from "@/components/SourceForm";
 import YandexMapComponent from "@/components/Map";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Sources } from "@/components/Sources";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 export default function SourcesPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,6 +39,7 @@ export default function SourcesPage() {
   const [placemark, setPlacemark] = useState<PlacemarkProps>();
 
   const [formShown, setFormShown] = useState<boolean>(false);
+  const [panelShown, setPanelShown] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -111,6 +113,7 @@ export default function SourcesPage() {
 
   const handleClick = (id?: string) => {
     setFormShown(true);
+    setPanelShown(true);
 
     if (id) {
       const sourceFound = sources.find((source: Source) => source.id === id);
@@ -120,28 +123,52 @@ export default function SourcesPage() {
     }
   };
 
+  const translate =
+    !panelShown && formShown
+      ? "-translate-x-[51rem]"
+      : !panelShown && !formShown
+      ? "-translate-x-[25rem]"
+      : "";
+
   return (
-    <main
-      className={`relative grid ${
-        formShown ? "grid-cols-[26rem_26rem_auto]" : "grid-cols-[26rem_auto]"
-      } gap-6 bg-[#f8f9fa] dark:bg-[#212529]`}
-    >
+    <main className="relative bg-[#f8f9fa] dark:bg-[#212529] p-1 h-[100vh]">
       <ThemeSwitcher />
-      <Sources
-        sources={sources}
-        loading={loading}
-        error={error}
-        removeSource={removeSource}
-        handleClick={handleClick}
-      />
-      {formShown && (
-        <SourceForm
-          onSubmit={(formData) => handleData(formData)}
-          onChange={setSource}
-          onClick={() => setFormShown(false)}
-          initialData={source}
+      <div
+        className={`absolute z-1 left-3 bottom-3 transition duration-300 ease-in-out grid gap-6 ${
+          formShown ? "grid-cols-[24rem_24rem_auto]" : "grid-cols-[24rem_auto]"
+        } ${panelShown ? "" : translate}`}
+      >
+        <Sources
+          sources={sources}
+          loading={loading}
+          error={error}
+          removeSource={removeSource}
+          handleClick={handleClick}
         />
-      )}
+        {formShown && (
+          <SourceForm
+            onSubmit={(formData) => handleData(formData)}
+            onChange={setSource}
+            onClick={() => setFormShown(false)}
+            initialData={source}
+          />
+        )}
+        <button
+          aria-label="Открыть панель источников"
+          className="p-3 h-[48px] w-[48px] self-center bg-[#212529] hover:bg-[#343a40] transition duration-300 ease-in-out rounded-full"
+          onClick={() => {
+            setPanelShown((prev) => {
+              return !prev;
+            });
+          }}
+        >
+          {panelShown ? (
+            <LuChevronLeft aria-hidden={true} color="#f8f9fa" size="24px" />
+          ) : (
+            <LuChevronRight aria-hidden={true} color="#f8f9fa" size="24px" />
+          )}
+        </button>
+      </div>
 
       {formShown ? (
         <YandexMapComponent placemark={placemark} onClick={handleClick} />

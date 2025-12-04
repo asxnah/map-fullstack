@@ -24,7 +24,7 @@ export const Sources = ({
   );
 
   return (
-    <section className="p-4 h-full w-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
+    <section className="p-4 h-[60vh] w-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
       <h1 className="mb-6 text-center text-2xl text-[#212529] dark:text-[#f8f9fa]">
         Источники
       </h1>

@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Input } from "@/ui/Input";
-import { LuChevronLeft } from "react-icons/lu";
+import { LuX } from "react-icons/lu";
 
 interface CreateSourceProps {
   onChange: (data: Source) => void;
@@ -54,7 +54,7 @@ export const SourceForm = ({
   };
 
   return (
-    <section className="flex flex-col gap-6 p-4 h-full bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
+    <section className="flex overflow-hidden flex-col gap-6 p-4 h-[60vh] bg-[#e9ecef] dark:bg-[#343a40] rounded-2xl">
       <div className="flex justify-between items-center">
         <button
           onClick={onClick}
@@ -62,18 +62,21 @@ export const SourceForm = ({
             formData.id ? "изменения" : "создания"
           } источника`}
         >
-          <LuChevronLeft
+          <LuX
             aria-hidden="true"
             size={20}
-            className="stroke-[#212529] dark:stroke-[#f8f9fa]"
+            className="stroke-[#adb5bd] dark:stroke-[#dee2e6]"
           />
         </button>
         <h1 className="text-center text-2xl text-[#212529] dark:text-[#f8f9fa]">
           {formData.id ? "Изменить источник" : "Создать источник"}
         </h1>
       </div>
-      <form className="h-full flex flex-col" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-3">
+      <form
+        className="h-full flex flex-col overflow-y-scroll rounded-xl relative"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex flex-col gap-3 mb-14">
           <Input
             label="Наименование"
             id="title"
@@ -157,7 +160,7 @@ export const SourceForm = ({
         </div>
 
         <button
-          className="w-full mt-auto py-2 px-3 text-[#f8f9fa] bg-[#212529] hover:bg-[#343a40] dark:bg-[#f8f9fa] dark:hover:bg-[#e9ecef] transition duration-300 ease-in-out rounded-xl font-medium dark:text-[#212529]"
+          className="mt-auto py-2 px-24 text-[#f8f9fa] bg-[#212529] hover:bg-[#343a40] dark:bg-[#f8f9fa] dark:hover:bg-[#e9ecef] transition duration-300 ease-in-out rounded-xl font-medium dark:text-[#212529] fixed bottom-7 self-center"
           type="submit"
         >
           {formData.id ? "Сохранить" : "Добавить"}

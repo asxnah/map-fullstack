@@ -31,7 +31,7 @@ const YandexMapComponent = dynamic<{
       };
 
       return ({ placemark, placemarkList, onClick }: YandexMapProps) => (
-        <div className="rounded-2xl overflow-hidden">
+        <div className="h-full w-full rounded-2xl overflow-hidden">
           <YMaps
             query={{
               lang: "ru_RU",
