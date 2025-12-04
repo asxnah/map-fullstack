@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Input } from "@/ui/Input";
-import { LuChevronLeft } from "react-icons/lu";
+import { LuX } from "react-icons/lu";
 
 interface CreateSourceProps {
   onChange: (data: Source) => void;
@@ -62,10 +62,10 @@ export const SourceForm = ({
             formData.id ? "изменения" : "создания"
           } источника`}
         >
-          <LuChevronLeft
+          <LuX
             aria-hidden="true"
             size={20}
-            className="stroke-[#212529] dark:stroke-[#f8f9fa]"
+            className="stroke-[#adb5bd] dark:stroke-[#dee2e6]"
           />
         </button>
         <h1 className="text-center text-2xl text-[#212529] dark:text-[#f8f9fa]">
