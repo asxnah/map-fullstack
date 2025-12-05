@@ -1,3 +1,4 @@
+import { Source } from "@/shared/types/source";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SourcesState {
